@@ -52,8 +52,10 @@
         }
 
         function sendMessage() {
-            tg.sendData("Hello from WebApp!"); // 发送数据给 Bot
-            tg.close(); // 发送后关闭 Mini App
+            let userData = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.first_name : "未知用户";
+            let message = `Hello from WebApp! 用户: ${userData}`;
+            tg.sendData(message); // 发送数据给 Bot
+            setTimeout(() => { tg.close(); }, 500); // 500ms 后关闭 Mini App
         }
     </script>
 </body>
