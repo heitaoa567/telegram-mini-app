@@ -52,9 +52,15 @@
         }
 
         function sendMessage() {
-            let userData = tg.initDataUnsafe.user ? tg.initDataUnsafe.user.first_name : "未知用户";
-            let message = `Hello from WebApp! 用户: ${userData}`;
-            tg.sendData(message); // 发送数据给 Bot
+            if (tg.initDataUnsafe && tg.initDataUnsafe.user) {
+                let userData = `用户: ${tg.initDataUnsafe.user.first_name}`;
+                let message = `Hello from WebApp! ${userData}`;
+                console.log("发送数据:", message); // 在 Console 里检查是否执行
+                tg.sendData(message); // 发送数据给 Bot
+            } else {
+                console.log("未能获取 Telegram 用户信息！");
+            }
+
             setTimeout(() => { tg.close(); }, 500); // 500ms 后关闭 Mini App
         }
     </script>
